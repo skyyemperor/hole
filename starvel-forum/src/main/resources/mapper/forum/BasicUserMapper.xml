@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.starvel.forum.mapper.BasicUserMapper">
+    <resultMap id="BaseResultMap" type="com.starvel.forum.data.po.BasicUser">
+        <!--@mbg.generated-->
+        <!--@Table basic_user-->
+        <id column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="stu_num" jdbcType="VARCHAR" property="stuNum"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="gender" jdbcType="VARCHAR" property="gender"/>
+        <result column="academy" jdbcType="VARCHAR" property="academy"/>
+        <result column="introduction" jdbcType="VARCHAR" property="introduction"/>
+        <result column="campus" jdbcType="VARCHAR" property="campus"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        user_id, stu_num, user_name, real_name,gender, academy, introduction, campus
+    </sql>
+    <sql id="selectBasicUserVo">
+        SELECT user_id,
+               stu_num,
+               user_name,
+               real_name,
+               gender,
+               academy,
+               introduction,
+               campus
+        FROM basic_user
+    </sql>
+    <select id="selectByUserName" resultMap="BaseResultMap">
+        <include refid="selectBasicUserVo"/>
+        WHERE user_name = #{userName}
+    </select>
+</mapper>

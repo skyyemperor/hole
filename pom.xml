@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.starvel</groupId>
+    <artifactId>starvel</artifactId>
+    <version>0.0.1</version>
+    <name>starvel</name>
+    <description>starvel系统</description>
+
+    <packaging>pom</packaging>
+    <modules>
+        <module>starvel-admin</module>
+        <module>starvel-hole</module>
+        <module>starvel-auth</module>
+        <module>starvel-common</module>
+        <module>starvel-framework</module>
+        <module>starvel-forum</module>
+        <module>starvel-gateway</module>
+    </modules>
+
+    <properties>
+        <starvel.version>${project.version}</starvel.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <fastjson.version>1.2.74</fastjson.version>
+        <okhttp.version>4.1.0</okhttp.version>
+        <jsoup.version>1.12.1</jsoup.version>
+        <mybatis.plus.version>3.4.1</mybatis.plus.version>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- SpringBoot的依赖配置-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.4.1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.starvel</groupId>
+                <artifactId>starvel-admin</artifactId>
+                <version>${starvel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.starvel</groupId>
+                <artifactId>starvel-common</artifactId>
+                <version>${starvel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.starvel</groupId>
+                <artifactId>starvel-auth</artifactId>
+                <version>${starvel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.starvel</groupId>
+                <artifactId>starvel-framework</artifactId>
+                <version>${starvel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.starvel</groupId>
+                <artifactId>starvel-hole</artifactId>
+                <version>${starvel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.starvel</groupId>
+                <artifactId>starvel-forum</artifactId>
+                <version>${starvel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.starvel</groupId>
+                <artifactId>starvel-gateway</artifactId>
+                <version>${starvel.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+</project>

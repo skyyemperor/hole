@@ -1,0 +1,74 @@
+# 项目相关配置
+starvel:
+  # 名称
+  name: STARVEL
+  # 版本
+  version: 0.0.1
+  # 版权年份
+  copyrightYear: 2020
+  # 文件路径 示例（ Windows配置D:/starvel/uploadPath，Linux配置 /home/starvel/uploadPath）
+  profile: D:/starvel/uploadPath
+
+server:
+  port: 6011
+
+spring:
+  application:
+    name: STAR-TRAVEL-HOLE
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://skyemperor.top:3306/hole?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=GMT%2B8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: Root!2333
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 600000
+      maximum-pool-size: 20
+      auto-commit: true
+      pool-name: MyHikariCP_card
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  redis:
+    host: skyemperor.top
+    port: 6379
+    database: 0
+    password: Redis!2333
+    jedis:
+      pool:
+        max-idle: 500
+        min-idle: 50
+        max-active: 2000
+        max-wait: 1000
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+  mail:
+    username: skyyemperor@qq.com
+    password: pxrxnyzryhatdgei
+    host: smtp.qq.com
+    port: 465
+    properties:
+      mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
+      mail.smtp.socketFactory.port: 465
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.starttls.required: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+project:
+  name: STARVEL
+
+
+# MyBatis配置
+mybatis-plus:
+  # 搜索指定包别名
+  typeAliasesPackage: com.starvel.*.data.po
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath:mapper/forum/*.xml,classpath:mapper/auth/*.xml,classpath:mapper/common/*.xml,classpath:mapper/framework/*.xml,classpath:mapper/gateway/*.xml,classpath:mapper/hole/*.xml
+  # 加载全局的配置文件
+  configLocation: classpath:mybatis/mybatis-config.xml

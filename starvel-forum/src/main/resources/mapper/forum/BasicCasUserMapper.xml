@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.starvel.forum.mapper.BasicCasUserMapper">
+    <resultMap id="BaseResultMap" type="com.starvel.forum.data.po.BasicCasUser">
+        <!--@mbg.generated-->
+        <!--@Table basic_cas_user-->
+        <id column="basic_user_id" jdbcType="BIGINT" property="basicUserId"/>
+        <result column="stu_num" jdbcType="VARCHAR" property="stuNum"/>
+        <result column="cas_password" jdbcType="VARCHAR" property="casPassword"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        basic_user_id, stu_num, cas_password
+    </sql>
+</mapper>

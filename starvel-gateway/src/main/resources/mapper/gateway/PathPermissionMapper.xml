@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.starvel.gateway.mapper.PathPermissionMapper">
+    <resultMap id="BaseResultMap" type="com.starvel.gateway.data.po.PathPermission">
+        <!--@mbg.generated-->
+        <!--@Table security_path_permission-->
+        <id column="path" jdbcType="VARCHAR" property="path"/>
+        <result column="perm_id" jdbcType="INTEGER" property="permId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        `path`, perm_id
+    </sql>
+</mapper>

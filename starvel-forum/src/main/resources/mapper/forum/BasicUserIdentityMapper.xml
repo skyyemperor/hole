@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.starvel.forum.mapper.BasicUserIdentityMapper">
+    <resultMap id="BaseResultMap" type="com.starvel.forum.data.po.BasicUserIdentity">
+        <!--@mbg.generated-->
+        <!--@Table basic_user_identity-->
+        <id column="basic_user_id" jdbcType="BIGINT" property="basicUserId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="stoken_cnt" jdbcType="INTEGER" property="stokenCnt"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        basic_user_id, user_name, `password`, email, stoken_cnt
+    </sql>
+    <sql id="selectUserIdentityVo">
+        SELECT basic_user_id,
+               user_name,
+               `password`,
+               email,
+               stoken_cnt
+        FROM basic_user_identity
+    </sql>
+    <select id="selectByUserNameOrEmail" parameterType="string" resultMap="BaseResultMap">
+        <include refid="selectUserIdentityVo"/>
+        <where>
+            <choose>
+                <when test="u.endsWith(@com.starvel.common.constant.BaseValue@EMAIL_SUFFIX)">
+                    AND email = #{u}
+                </when>
+                <otherwise>
+                    AND user_name = #{u}
+                </otherwise>
+            </choose>
+        </where>
+        LIMIT 1
+    </select>
+</mapper>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.starvel.hole.mapper.HoleMapper">
+    <resultMap id="BaseResultMap" type="com.starvel.hole.data.po.Hole">
+        <!--@mbg.generated-->
+        <!--@Table hole-->
+        <id column="hole_id" jdbcType="BIGINT" property="holeId"/>
+        <result column="root_id" jdbcType="BIGINT" property="rootId"/>
+        <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
+        <result column="hole_user_id" jdbcType="BIGINT" property="holeUserId"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="date" jdbcType="TIMESTAMP" property="date"/>
+        <result column="like" jdbcType="INTEGER" property="like"/>
+        <result column="hate" jdbcType="INTEGER" property="hate"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        hole_id, root_id, parent_id, hole_user_id, content, `date`, `like`, hate, `status`,
+        `type`
+    </sql>
+    <insert id="postHole">
+        INSERT INTO hole
+        (root_id, parent_id, hole_user_id, content, `date`, `type`)
+        VALUES (#{rootId}, #{parentId}, #{holeUserId}, #{content}, now(), #{type})
+    </insert>
+    <select id="getLatestHoleOfUser" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM hole
+        WHERE hole_user_id = #{holeUserId}
+        ORDER BY `date` DESC LIMIT 1
+    </select>
+    <update id="addHoleLikeOrHate">
+        UPDATE hole
+        <set>
+            <if test="type == @com.starvel.common.constant.PostConstants@LIKE">
+                `like` = `like` + 1,
+            </if>
+            <if test="type == @com.starvel.common.constant.PostConstants@HATE">
+                hate = hate + 1,
+            </if>
+        </set>
+        WHERE hole_id = #{holeId}
+    </update>
+    <update id="subHoleLikeOrHate">
+        UPDATE hole
+        <set>
+            <if test="type == @com.starvel.common.constant.PostConstants@LIKE">
+                `like` = `like` - 1,
+            </if>
+            <if test="type == @com.starvel.common.constant.PostConstants@HATE">
+                hate = hate - 1,
+            </if>
+        </set>
+        WHERE hole_id = #{holeId}
+    </update>
+    <select id="getHoleList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM hole
+        WHERE root_id = #{rootId}
+        ORDER BY `date`
+        LIMIT #{start},#{count}
+    </select>
+    <select id="getHoleReply" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM hole
+        WHERE parent_id = #{parentId}
+        ORDER BY `date`
+        LIMIT #{start},#{count}
+    </select>
+    <select id="getPostedHole" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM hole
+        WHERE hole_user_id = #{holeUserId}
+        ORDER BY `date`
+        LIMIT #{start},#{count}
+    </select>
+
+</mapper>

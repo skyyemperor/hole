@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.starvel.forum.mapper.BasicUserStatusMapper">
+    <resultMap id="BaseResultMap" type="com.starvel.forum.data.po.BasicUserStatus">
+        <!--@mbg.generated-->
+        <!--@Table basic_user_status-->
+        <id column="basic_user_id" jdbcType="BIGINT" property="basicUserId"/>
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        basic_user_id, last_login_time, `status`
+    </sql>
+</mapper>

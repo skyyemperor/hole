@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.starvel.hole.mapper.HoleUserMapper">
+    <resultMap id="BaseResultMap" type="com.starvel.hole.data.po.HoleUser">
+        <!--@mbg.generated-->
+        <!--@Table hole_user-->
+        <id column="hole_user_id" jdbcType="BIGINT" property="holeUserId"/>
+        <result column="hole_user_name" jdbcType="VARCHAR" property="holeUserName"/>
+        <result column="hole_token" jdbcType="VARCHAR" property="holeToken"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        hole_user_id, hole_user_name, hole_token, `status`
+    </sql>
+    <select id="selectByStoken" resultType="java.lang.Long">
+        SELECT hole_user_id
+        FROM hole_user
+        WHERE hole_token = #{stoken}
+    </select>
+    <select id="getHoleUserInfo" resultMap="BaseResultMap">
+        SELECT hole_user_id, hole_user_name, status
+        FROM hole_user
+        WHERE hole_user_id = #{holeUserId}
+    </select>
+</mapper>

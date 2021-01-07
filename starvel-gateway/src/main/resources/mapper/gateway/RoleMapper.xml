@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.starvel.gateway.mapper.RoleMapper">
+    <resultMap id="BaseResultMap" type="com.starvel.gateway.data.po.Role">
+        <!--@mbg.generated-->
+        <!--@Table security_role-->
+        <id column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="perms" jdbcType="VARCHAR" property="perms"/>
+        <result column="comment" jdbcType="LONGVARCHAR" property="comment"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        `name`, perms, `comment`
+    </sql>
+</mapper>

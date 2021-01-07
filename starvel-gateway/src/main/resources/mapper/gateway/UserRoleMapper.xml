@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.starvel.gateway.mapper.UserRoleMapper">
+    <resultMap id="BaseResultMap" type="com.starvel.gateway.data.po.UserRole">
+        <!--@mbg.generated-->
+        <!--@Table security_user_role-->
+        <id column="basic_user_id" jdbcType="BIGINT" property="basicUserId"/>
+        <result column="role" jdbcType="VARCHAR" property="role"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        basic_user_id, `role`
+    </sql>
+</mapper>

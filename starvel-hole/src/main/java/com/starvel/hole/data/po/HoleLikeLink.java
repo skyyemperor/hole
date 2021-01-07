@@ -1,0 +1,38 @@
+package com.starvel.hole.data.po;
+
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.io.Serializable;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * Created by skyyemperor on 2020-12-22 1:04
+ * Description :
+ */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName(value = "hole_like_link")
+public class HoleLikeLink implements Serializable {
+    @TableId(value = "hole_id")
+    private Long holeId;
+
+    @TableField(value = "hole_user_id")
+    private Long holeUserId;
+
+    @TableField(value = "type")
+    private Integer type;
+
+    private static final long serialVersionUID = 1L;
+
+    public static final String COL_HOLE_ID = "hole_id";
+
+    public static final String COL_HOLE_USER_ID = "hole_user_id";
+
+    public static final String COL_TYPE = "type";
+}
