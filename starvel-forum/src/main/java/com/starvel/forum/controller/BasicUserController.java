@@ -7,6 +7,8 @@ import com.starvel.forum.service.BasicUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * Created by skyyemperor on 2020-12-17 21:20
  * Description :
@@ -118,8 +120,14 @@ public class BasicUserController {
     }
 
     @RequestMapping("/email/verify")
-    public Result verifyEmail(@RequestParam String code) {
-        return userService.verifyEmail(code);
+    public String verifyEmail(@RequestParam String code, HttpServletResponse response) {
+        response.setContentType("text/html");
+        Result result = userService.verifyEmail(code);
+        if (result.getCode() == 0) {
+            return result.getData().toString();
+        } else {
+            return "<h3 align=\"center\">" + result.getMessage() + "</h>";
+        }
     }
 
 

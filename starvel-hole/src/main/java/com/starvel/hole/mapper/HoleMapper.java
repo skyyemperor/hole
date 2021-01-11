@@ -36,4 +36,12 @@ public interface HoleMapper extends BaseMapper<Hole> {
     List<Hole> getPostedHole(@Param("holeUserId") Long holeUserId,
                              @Param("start") Integer start,
                              @Param("count") Integer count);
+
+    int addChildCount(@Param("holeId") Long holeId);
+
+    Long countHoleByRootId(@Param("rootId") Long rootId);
+
+    Long countHoleByParentId(@Param("parentId") Long parentId);
+
+    Long countHoleByHoleUserId(@Param("holeUserId") Long holeUserId);
 }

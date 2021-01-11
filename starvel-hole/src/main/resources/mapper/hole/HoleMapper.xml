@@ -14,15 +14,16 @@
         <result column="hate" jdbcType="INTEGER" property="hate"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
         <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="child_count" jdbcType="INTEGER" property="childCount"/>
     </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
-        hole_id, root_id, parent_id, hole_user_id, content, `date`, `like`, hate, `status`,
-        `type`
+        hole_id, root_id, parent_id, hole_user_id, content,child_count, `date`,
+        `like`, hate, `status`,`type`
     </sql>
     <insert id="postHole">
         INSERT INTO hole
-        (root_id, parent_id, hole_user_id, content, `date`, `type`)
+            (root_id, parent_id, hole_user_id, content, `date`, `type`)
         VALUES (#{rootId}, #{parentId}, #{holeUserId}, #{content}, now(), #{type})
     </insert>
     <select id="getLatestHoleOfUser" resultMap="BaseResultMap">
@@ -79,6 +80,26 @@
         WHERE hole_user_id = #{holeUserId}
         ORDER BY `date`
         LIMIT #{start},#{count}
+    </select>
+    <update id="addChildCount">
+        UPDATE hole
+        SET child_count = child_count + 1
+        WHERE hole_id = #{holeId}
+    </update>
+    <select id="countHoleByRootId" resultType="java.lang.Long">
+        SELECT COUNT(hole_id)
+        FROM hole
+        WHERE root_id = #{rootId}
+    </select>
+    <select id="countHoleByParentId" resultType="java.lang.Long">
+        SELECT COUNT(hole_id)
+        FROM hole
+        WHERE parent_id = #{parentId}
+    </select>
+    <select id="countHoleByHoleUserId" resultType="java.lang.Long">
+        SELECT COUNT(hole_id)
+        FROM hole
+        WHERE hole_user_id = #{holeUserId}
     </select>
 
 </mapper>

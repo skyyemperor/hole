@@ -79,6 +79,12 @@ public class Hole implements Serializable {
     @TableField(value = "`type`")
     private Integer type;
 
+    /**
+     * 子评论个数
+     */
+    @TableField(value = "child_count")
+    private Integer childCount;
+
     private static final long serialVersionUID = 1L;
 
     public static final String COL_HOLE_ID = "hole_id";

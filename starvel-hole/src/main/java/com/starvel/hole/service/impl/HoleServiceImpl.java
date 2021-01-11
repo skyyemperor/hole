@@ -57,6 +57,9 @@ public class HoleServiceImpl extends ServiceImpl<HoleMapper, Hole> implements Ho
 
         //发布hole
         if (holeMapper.postHole(holeUserId, rootId, parentId, content, type) > 0) {
+            //父评论childCount+1
+            holeMapper.addChildCount(parentId);
+
             //获取发布的hole
             Hole postedHole = holeMapper.getLatestHoleOfUser(holeUserId);
             HoleUser holeUser = holeUserMapper.getHoleUserInfo(holeUserId);
@@ -128,9 +131,11 @@ public class HoleServiceImpl extends ServiceImpl<HoleMapper, Hole> implements Ho
 
 
     @Override
-    public Result getHoleList(Long holeId, Integer page, Integer count) {
+    public Result getHoleList(Long rootId, Integer page, Integer size) {
         List<HoleDto> holeDtoList = new ArrayList<>();
-        List<Hole> holes = holeMapper.getHoleList(holeId, (page - 1) * count, count);
+//        Long sumCount = holeMapper.countHoleByRootId(rootId);
+//        Integer maxPage = sumCount
+        List<Hole> holes = holeMapper.getHoleList(rootId, (page - 1) * size, size);
         for (Hole hole : holes) {
             holeDtoList.add(new HoleDto(hole, getHoleUserInfo(hole.getHoleUserId())));
         }
@@ -138,9 +143,9 @@ public class HoleServiceImpl extends ServiceImpl<HoleMapper, Hole> implements Ho
     }
 
     @Override
-    public Result getHoleReply(Long holeId, Integer page, Integer count) {
+    public Result getHoleReply(Long parentId, Integer page, Integer size) {
         List<HoleDto> holeDtoList = new ArrayList<>();
-        List<Hole> holes = holeMapper.getHoleReply(holeId, (page - 1) * count, count);
+        List<Hole> holes = holeMapper.getHoleReply(parentId, (page - 1) * size, size);
         for (Hole hole : holes) {
             holeDtoList.add(new HoleDto(hole, getHoleUserInfo(hole.getHoleUserId())));
         }
@@ -148,9 +153,9 @@ public class HoleServiceImpl extends ServiceImpl<HoleMapper, Hole> implements Ho
     }
 
     @Override
-    public Result getPostedHole(Long holeUserId, Integer page, Integer count) {
+    public Result getPostedHole(Long holeUserId, Integer page, Integer size) {
         List<HoleDto> holeDtoList = new ArrayList<>();
-        List<Hole> holes = holeMapper.getPostedHole(holeUserId, (page - 1) * count, count);
+        List<Hole> holes = holeMapper.getPostedHole(holeUserId, (page - 1) * size, size);
         for (Hole hole : holes) {
             holeDtoList.add(new HoleDto(hole, getHoleUserInfo(hole.getHoleUserId())));
         }

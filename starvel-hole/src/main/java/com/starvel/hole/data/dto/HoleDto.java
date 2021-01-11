@@ -14,6 +14,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class HoleDto {
+//    private Integer curPage;
+//    private Integer maxPage;
+//    private Integer size;
     private Hole hole;
     private HoleUser holeUser;
 }

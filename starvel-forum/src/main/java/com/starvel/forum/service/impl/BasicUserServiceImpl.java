@@ -60,8 +60,10 @@ public class BasicUserServiceImpl extends ServiceImpl<BasicUserMapper, BasicUser
 
     private static final String BIND_EMAIL_VERIFY_URL = BaseValue.HOST + "/api/basic_user/email/verify?code=";
     private static final String BIND_EMAIL_SUBJECT = "HOLE | 邮箱绑定验证";
-    private static final String BIND_EMAIL_CONTENT = "欢迎使用HOLE！！\n\n您在使用本邮箱绑定HOLE账号，\n" +
-            "如非本人操作，请忽略。\n\n如链接点击无反应，请复制下方链接至浏览器中打开，此链接半小时内有效。\n\n确认绑定:\n";
+    private static final String BIND_EMAIL_CONTENT = "<h4>欢迎使用HOLE！！</h4><br>您在使用本邮箱绑定HOLE账号，如非本人操作，请忽略。\n" +
+            "<br>如链接点击无反应，请复制下方链接至浏览器中打开，此链接半小时内有效。<br><a href=\"%s\">%s</a>";
+    private static final String BIND_EMAIL_SUCCESS_PAGE = "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>邮箱绑定成功</title></head><body>\n" +
+            "<h2>邮箱绑定成功！！</h2 align=\"center\"><a href=\"http://skyemperor.top/front_project/hole/\">点我跳转主页面</a></body></html>";
 
     @Override
     public Result getUserInfo(Long userId) {
@@ -89,8 +91,8 @@ public class BasicUserServiceImpl extends ServiceImpl<BasicUserMapper, BasicUser
             return Result.getResult(BasicUserError.EMAIL_HAS_BIND);
         }
 
-        String content = BIND_EMAIL_CONTENT + generateEmailBindLink(userId, email);
-        mailUtil.sendHtml(BIND_EMAIL_SUBJECT, content, email);
+        String verifyLink = generateEmailBindLink(userId, email);
+        mailUtil.sendHtml(BIND_EMAIL_SUBJECT, String.format(BIND_EMAIL_CONTENT, verifyLink, verifyLink), email);
 
         return Result.success();
     }
@@ -112,7 +114,7 @@ public class BasicUserServiceImpl extends ServiceImpl<BasicUserMapper, BasicUser
         }
 
         if (identityMapper.updateById(userIdentity) > 0) {
-            return Result.success();
+            return Result.success(BIND_EMAIL_SUCCESS_PAGE);
         } else {
             return Result.fail();
         }
